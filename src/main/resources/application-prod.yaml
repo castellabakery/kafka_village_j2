@@ -18,7 +18,7 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
-    name: ${file.separator}data${file.separator}logs${file.separator}simulator.log
+    name: ${file.separator}data${file.separator}logs${file.separator}kafka_village_j2.log
   level:
     root: info
     com:

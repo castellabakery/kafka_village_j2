@@ -1,0 +1,42 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: path_pattern_parser
+
+  kafka:
+    producer:
+      bootstrap-servers: kafka.kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: kafka.kafka:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: ${file.separator}data${file.separator}logs${file.separator}simulator.log
+  level:
+    root: info
+    com:
+      zaxxer:
+        hikari: info
+    jdbc:
+      resultset: info
+      resultsettable: info
+      audit: info
+      sqltiming: info
+      connection: info
+    org.hibernate:
+      type: trace
+      SQL: debug
+    org.springframework.web: info
+    javax.sql.DataSource: info
+    log4jdbc.log4j2: off
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB

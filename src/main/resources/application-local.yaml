@@ -22,6 +22,21 @@ spring:
       password: "dlwk2452!@"
       authentication-database: admin
 
+  datasource:
+    url: jdbc:postgresql://pastelcloud.shop:31543/testdb
+    username: postgres
+    password: dlwk2452!@
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        ddl-auto: none
+
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

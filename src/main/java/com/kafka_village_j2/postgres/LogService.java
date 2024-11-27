@@ -14,6 +14,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.bson.Document;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -28,6 +29,7 @@ public class LogService {
     private final String DELETE = "DELETE_POSTGRES";
 
     @KafkaListener(topics = {CREATE, UPDATE, DELETE}, groupId = "p2")
+    @Transactional
     public void postgres(ConsumerRecord<String, String> message) {
         log.info("### topic / message ### - [{}] / [{}]", message.topic(), message.value());
         String topic = message.topic();
@@ -75,8 +77,11 @@ public class LogService {
 
         filterMap = (Map<String, Object>) request.get("filter");
         actionMap = (Map<String, Object>) request.get("action");
-        String key = String.valueOf(request.get("key"));
 
+        Log log = logRepository.findById(String.valueOf(filterMap.get("uuid"))).orElseThrow(() -> new FailedRequestException(ExceptionCode.NOT_EXISTS, String.valueOf(filterMap.get("uuid"))));
+        log.setName(actionMap.containsKey("name") ? String.valueOf(actionMap.get("name")) : log.getName());
+        log.setAge(actionMap.containsKey("age") ? Integer.parseInt(String.valueOf(actionMap.get("age"))) : log.getAge());
+        logRepository.save(log);
     }
 
     public void delete(String message) {
@@ -87,5 +92,7 @@ public class LogService {
 
         filterMap = request.get("filter");
 
+        Log log = logRepository.findById(String.valueOf(filterMap.get("uuid"))).orElseThrow(() -> new FailedRequestException(ExceptionCode.NOT_EXISTS, String.valueOf(filterMap.get("uuid"))));
+        logRepository.delete(log);
     }
 }

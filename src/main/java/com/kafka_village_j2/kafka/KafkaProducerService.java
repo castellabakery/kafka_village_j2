@@ -15,6 +15,7 @@ import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class KafkaProducerService {
     private final String DELETE = "DELETE";
 
     @KafkaListener(topics = {CREATE, UPDATE, DELETE}, groupId = "j2")
+    @Transactional
     public void mongodb(ConsumerRecord<String, String> message) {
         log.info("### topic / message ### - [{}] / [{}]", message.topic(), message.value());
         String topic = message.topic();

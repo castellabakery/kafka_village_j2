@@ -21,6 +21,7 @@ spring:
       username: root
       password: "dlwk2452!@"
       authentication-database: admin
+      auto-index-creation: true
 
   datasource:
     url: jdbc:postgresql://pastelcloud.shop:31543/testdb

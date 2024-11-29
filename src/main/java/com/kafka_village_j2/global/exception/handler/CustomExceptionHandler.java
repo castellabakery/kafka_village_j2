@@ -1,8 +1,8 @@
-package com.kafka_village_j2.config.exception.handler;
+package com.kafka_village_j2.global.exception.handler;
 
-import com.kafka_village_j2.config.domain.dto.ResponseDto;
-import com.kafka_village_j2.config.exception.FailedRequestException;
-import com.kafka_village_j2.config.exception.enumeration.ExceptionCode;
+import com.kafka_village_j2.global.domain.dto.ResponseDto;
+import com.kafka_village_j2.global.exception.FailedRequestException;
+import com.kafka_village_j2.global.exception.enumeration.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.kafka_village_j2.config.domain.dto;
+package com.kafka_village_j2.global.domain.dto;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Builder;

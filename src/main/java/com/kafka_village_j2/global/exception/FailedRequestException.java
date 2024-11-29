@@ -1,6 +1,6 @@
-package com.kafka_village_j2.config.exception;
+package com.kafka_village_j2.global.exception;
 
-import com.kafka_village_j2.config.exception.enumeration.ExceptionCode;
+import com.kafka_village_j2.global.exception.enumeration.ExceptionCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 

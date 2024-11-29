@@ -1,7 +1,7 @@
-package com.kafka_village_j2.config.domain.dto;
+package com.kafka_village_j2.global.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.kafka_village_j2.config.exception.enumeration.ExceptionCode;
+import com.kafka_village_j2.global.exception.enumeration.ExceptionCode;
 import lombok.Getter;
 import lombok.ToString;
 

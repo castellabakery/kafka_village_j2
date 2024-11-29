@@ -1,6 +1,6 @@
-package com.kafka_village_j2.config.exception.enumeration;
+package com.kafka_village_j2.global.exception.enumeration;
 
-import com.kafka_village_j2.config.exception.FailedRequestException;
+import com.kafka_village_j2.global.exception.FailedRequestException;
 import lombok.Getter;
 
 @Getter

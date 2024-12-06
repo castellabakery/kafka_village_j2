@@ -1,44 +1,25 @@
 package com.kafka_village_j2.kafka.consumer;
 
-import com.kafka_village_j2.global.exception.FailedRequestException;
-import com.kafka_village_j2.global.exception.enumeration.ExceptionCode;
-import com.kafka_village_j2.kafka.common.MessageParser;
 import com.kafka_village_j2.kafka.constants.KafkaTopic;
-import com.kafka_village_j2.kafka.enumeration.DdlType;
-import com.kafka_village_j2.log.dto.LogDto;
 import com.kafka_village_j2.log.mongodb.MongodbDatabaseConsumerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
-public class MongodbDatabaseConsumer {
-    private final MongodbDatabaseConsumerService databaseConsumerService;
-
+public class MongodbDatabaseConsumer extends DatabaseConsumer {
+    private final MongodbDatabaseConsumerService mongodbDatabaseConsumerService;
+    public MongodbDatabaseConsumer(MongodbDatabaseConsumerService mongodbDatabaseConsumerService) {
+        super(mongodbDatabaseConsumerService);
+        this.mongodbDatabaseConsumerService = mongodbDatabaseConsumerService;
+    }
     private final String TOPIC = KafkaTopic.MONGODB;
 
     @KafkaListener(topics = {TOPIC}, groupId = "p2")
-    @Transactional
     public void consume(ConsumerRecord<String, String> message) {
-        log.info("### topic / message ### - [{}] / [{}]", message.topic(), message.value());
-
-        LogDto.Message parsedMessage = MessageParser.parseMessage(message.value(), LogDto.Message.class);
-        DdlType type = parsedMessage.getType();
-        String msg = parsedMessage.getMessage().toString();
-
-        if (type.equals(DdlType.CREATE)) {
-            databaseConsumerService.create(msg);
-        } else if (type.equals(DdlType.UPDATE)) {
-            databaseConsumerService.update(msg);
-        } else if (type.equals(DdlType.DELETE)) {
-            databaseConsumerService.delete(msg);
-        } else {
-            throw new FailedRequestException(ExceptionCode.NOT_EXISTS, parsedMessage.toString());
-        }
+        super.consumeImpl(message);
     }
 }

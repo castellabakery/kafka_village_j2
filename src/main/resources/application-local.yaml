@@ -19,14 +19,14 @@ spring:
       port: 31234
       database: wood
       username: root
-      password: "dlwk2452!@"
+      password:
       authentication-database: admin
       auto-index-creation: true
 
   datasource:
     url: jdbc:postgresql://pastelcloud.shop:31543/testdb
     username: postgres
-    password: dlwk2452!@
+    password:
 
   jpa:
     open-in-view: false

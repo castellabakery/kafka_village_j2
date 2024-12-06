@@ -19,13 +19,13 @@ spring:
       port: 27017
       database: wood
       username: root
-      password: "dlwk2452!@"
+      password:
       authentication-database: admin
 
   datasource:
     url: jdbc:postgresql://postgresql.postgresql:5432/testdb
     username: postgres
-    password: dlwk2452!@
+    password:
 
   jpa:
     open-in-view: false

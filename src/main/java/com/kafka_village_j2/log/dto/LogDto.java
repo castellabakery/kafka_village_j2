@@ -1,11 +1,14 @@
 package com.kafka_village_j2.log.dto;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.kafka_village_j2.kafka.enumeration.DdlType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 public class LogDto {
 
@@ -67,6 +70,20 @@ public class LogDto {
         @Builder
         public Delete(Filter filter) {
             this.filter = filter;
+        }
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @ToString
+    public static class Message {
+        private DdlType type;
+        private JsonNode message;
+
+        @Builder
+        public Message(DdlType type, JsonNode message) {
+            this.type = type;
+            this.message = message;
         }
     }
 }
